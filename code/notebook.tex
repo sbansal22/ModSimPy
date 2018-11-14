@@ -1,0 +1,1303 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Hidden Figures - Checkpoint 4}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{hidden-figures}{%
+\section{Hidden Figures}\label{hidden-figures}}
+
+    A simulation of Space Capsule Re-entry by Sparsh Bansal and Argyris
+Kriezis
+
+    \hypertarget{question}{%
+\section{Question}\label{question}}
+
+    \hypertarget{what-is-the-heat-experienced-by-the-heat-shield-of-a-space-capsule-spacex-dragon-2-capsule-and-what-is-the-temperature-to-which-it-is-heated-to-as-it-re-enters-earth-from-the-orbits-of-i-earth-ii-moon-and-iii-mars.}{%
+\section{What is the heat experienced by the heat shield of a space
+capsule (SpaceX Dragon 2 capsule), and what is the temperature to which
+it is heated to as it re-enters Earth from the orbits of (i) Earth, (ii)
+Moon, and (iii)
+Mars.}\label{what-is-the-heat-experienced-by-the-heat-shield-of-a-space-capsule-spacex-dragon-2-capsule-and-what-is-the-temperature-to-which-it-is-heated-to-as-it-re-enters-earth-from-the-orbits-of-i-earth-ii-moon-and-iii-mars.}}
+
+    \begin{figure}
+\centering
+\includegraphics{attachment:image.png}
+\caption{image.png}
+\end{figure}
+
+    Image credits - Crew Dragon 2 capsule manufactured by SpaceX, and run by
+NASA and SpaceX.
+
+    \hypertarget{model}{%
+\section{Model}\label{model}}
+
+    Factors causing the heat energy transfer:
+
+\begin{enumerate}
+\def\labelenumi{(\roman{enumi})}
+\tightlist
+\item
+  Friction due to the atmosphere - Force of Drag
+\item
+  Heat lost to the atmosphere
+\end{enumerate}
+
+When a large object enters the atmosphere at high speed, the air in
+front of it gets compressed so much that it becomes extremely hot.
+
+    Parameters that affect the heat energy production:
+
+\begin{enumerate}
+\def\labelenumi{(\roman{enumi})}
+\tightlist
+\item
+  Velocity of the spacecraft (m/s)
+\item
+  Radius of the nose (m)
+\item
+  Air Density (kg/m\^{}3)
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}485}]:} \PY{c+c1}{\PYZsh{} Configure Jupyter so figures appear in the notebook}
+          \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+          
+          \PY{c+c1}{\PYZsh{} Configure Jupyter to display the assigned value after an assignment}
+          \PY{o}{\PYZpc{}}\PY{k}{config} InteractiveShell.ast\PYZus{}node\PYZus{}interactivity=\PYZsq{}last\PYZus{}expr\PYZus{}or\PYZus{}assign\PYZsq{}
+          
+          \PY{c+c1}{\PYZsh{} import functions from the modsim.py module}
+          \PY{k+kn}{from} \PY{n+nn}{modsim} \PY{k}{import} \PY{o}{*}
+          
+          \PY{k+kn}{from} \PY{n+nn}{scipy} \PY{k}{import} \PY{o}{*}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}486}]:} \PY{k+kn}{from} \PY{n+nn}{pandas} \PY{k}{import} \PY{n}{read\PYZus{}csv}
+          \PY{n}{density\PYZus{}data} \PY{o}{=} \PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Model\PYZus{}Data.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{density\PYZus{}data}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Altitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Scale Height}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Atmospheric\PYZus{}Density}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}487}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{density\PYZus{}data}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+   Altitude  Scale Height  Atmospheric\_Density
+0         0           8.4         1.225000e+00
+1       100           5.9         5.250000e-07
+2       150          25.5         1.730000e-09
+3       200          37.5         2.410000e-10
+4       250          44.8         5.970000e-11
+5       300          50.3         1.870000e-11
+6       350          54.8         6.660000e-12
+7       400          58.2         2.620000e-12
+8       450          61.3         1.090000e-12
+9       500          64.5         4.760000e-13
+10      550          68.7         2.140000e-13
+11      600          74.8         9.890000e-14
+12      650          84.4         4.730000e-14
+13      700          99.3         2.360000e-14
+14      750         121.0         1.240000e-14
+15      800         151.0         6.950000e-15
+16      850         188.0         4.220000e-15
+17      900         226.0         2.780000e-15
+18      950         263.0         1.980000e-15
+19    1,000         296.0         1.490000e-15
+20    1,250         408.0         5.700000e-16
+21    1,500         516.0         2.790000e-16
+22    2,000         829.0         9.090000e-17
+23    2,500        1220.0         4.230000e-17
+24    3,000        1590.0         2.540000e-17
+25    3,500        1900.0         1.770000e-17
+26    4,000        2180.0         1.340000e-17
+27    4,500        2430.0         1.060000e-17
+28    5,000        2690.0         8.620000e-18
+29    6,000        3200.0         6.090000e-18
+30    7,000        3750.0         4.560000e-18
+31    8,000        4340.0         3.560000e-18
+32    9,000        4970.0         2.870000e-18
+33   10,000        5630.0         2.370000e-18
+34   15,000        9600.0         1.210000e-18
+35   20,000       14600.0         7.920000e-19
+36   25,000       20700.0         5.950000e-19
+37   30,000       27800.0         4.830000e-19
+38   35,000       36000.0         4.130000e-19
+39   35,786       37300.0         4.040000e-19
+
+    \end{Verbatim}
+
+    We assume constant atmosperic density in intervals of 50,000 meters
+according to the atmospheric density data published by NASA.
+
+    The capsule mass(m), Drag Coefficient(Cd), and Radius of nose(r) have
+been based on the Crew Dragon 2 capsule.
+
+Referring to the optimal range of angle of trajectory for re-entry to
+earth to be 5.3° to 7.7° (NASA Apollo missions), we assume that the
+optimum angle of trajectory for re-entry of the capsule in our model is
+6°.
+
+For transfer of heat, we only account for conduction of heat. We ignore
+the radiation of heat from the heat shield of the capsule to the
+atmosphere.
+
+We made these assumptions to keep our model in regime.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}488}]:} \PY{n}{m} \PY{o}{=} \PY{l+m+mi}{8857}
+          \PY{n}{g} \PY{o}{=} \PY{l+m+mf}{9.8}
+          \PY{n}{Cd} \PY{o}{=} \PY{l+m+mi}{1}
+          \PY{n}{r} \PY{o}{=} \PY{l+m+mf}{1.85}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}488}]:} 1.85
+\end{Verbatim}
+            
+    \hypertarget{re-entry-from-earth}{%
+\section{Re-entry from Earth}\label{re-entry-from-earth}}
+
+    The calculation of the initial values of Kinetic Energy(KE), Potential
+Energy(PE), and Mechanical Energy(ME) have been made on the basis of the
+orbital velocity(V) and height of the capsule(h).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}489}]:} \PY{k}{def} \PY{n+nf}{make\PYZus{}system} \PY{p}{(}\PY{n}{V}\PY{p}{,} \PY{n}{h}\PY{p}{,} \PY{n}{ρ}\PY{p}{,} \PY{n}{Θ}\PY{p}{,} \PY{n}{dt}\PY{p}{)}\PY{p}{:}
+              
+              \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{l+s+sd}{    m = mass of the capsule during re\PYZhy{}entry}
+          \PY{l+s+sd}{    V = Velocity of the spacecraft}
+          \PY{l+s+sd}{    ρ = Fluid density of the atmosphere}
+          \PY{l+s+sd}{    r = radius of the nose}
+          \PY{l+s+sd}{    dt = time step}
+          \PY{l+s+sd}{    KE = Kinetic Energy of the Capsule}
+          \PY{l+s+sd}{    PE = Potential Energy of the Capsule}
+          \PY{l+s+sd}{    ME = Mechanical Energy of the Capsule}
+          \PY{l+s+sd}{    h = Height of the Capsule from the surface of the Earth}
+          \PY{l+s+sd}{    HS = Heat generated on the heat shield}
+          \PY{l+s+sd}{    HA = Heat lost to the atmosphere}
+          \PY{l+s+sd}{    Θ = Angle of trajectory}
+          \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+              \PY{n}{init\PYZus{}earth} \PY{o}{=} \PY{n}{State}\PY{p}{(}\PY{n}{KE} \PY{o}{=} \PY{l+m+mi}{262565765000}\PY{p}{,} \PY{n}{PE} \PY{o}{=} \PY{l+m+mi}{23293574582}\PY{p}{,} \PY{n}{ME} \PY{o}{=} \PY{l+m+mi}{285859339582}\PY{p}{,} \PY{n}{HS} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{HA} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}
+              \PY{n}{init\PYZus{}moon} \PY{o}{=} \PY{n}{State}\PY{p}{(}\PY{n}{KE} \PY{o}{=} \PY{l+m+mi}{518646806594}\PY{p}{,} \PY{n}{PE} \PY{o}{=} \PY{l+m+mi}{23293574582}\PY{p}{,} \PY{n}{ME} \PY{o}{=} \PY{l+m+mi}{541940381176}\PY{p}{,} \PY{n}{HS} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{HA} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}
+              \PY{n}{init\PYZus{}mars} \PY{o}{=} \PY{n}{State}\PY{p}{(}\PY{n}{KE} \PY{o}{=} \PY{l+m+mi}{575527860000}\PY{p}{,} \PY{n}{PE} \PY{o}{=} \PY{l+m+mi}{23293574582}\PY{p}{,} \PY{n}{ME} \PY{o}{=} \PY{l+m+mi}{285859339582}\PY{p}{,} \PY{n}{HS} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{HA} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}
+              
+              \PY{n}{t\PYZus{}0} \PY{o}{=} \PY{l+m+mi}{0}
+              \PY{n}{t\PYZus{}end} \PY{o}{=} \PY{l+m+mi}{500}
+              \PY{k}{return} \PY{n}{System}\PY{p}{(}\PY{n}{V}\PY{o}{=}\PY{n}{V}\PY{p}{,} \PY{n}{h}\PY{o}{=}\PY{n}{h}\PY{p}{,} \PY{n}{ρ}\PY{o}{=}\PY{n}{ρ}\PY{p}{,} \PY{n}{dt}\PY{o}{=}\PY{n}{dt}\PY{p}{,} 
+                            \PY{n}{init\PYZus{}earth}\PY{o}{=}\PY{n}{init\PYZus{}earth}\PY{p}{,}
+                            \PY{n}{init\PYZus{}moon}\PY{o}{=}\PY{n}{init\PYZus{}moon}\PY{p}{,}
+                            \PY{n}{init\PYZus{}mars}\PY{o}{=}\PY{n}{init\PYZus{}mars}\PY{p}{,}
+                            \PY{n}{t\PYZus{}0}\PY{o}{=}\PY{n}{t\PYZus{}0}\PY{p}{,} \PY{n}{Θ}\PY{o}{=}\PY{n}{Θ}\PY{p}{,} \PY{n}{t\PYZus{}end} \PY{o}{=} \PY{n}{t\PYZus{}end}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}490}]:} \PY{n}{system\PYZus{}earth} \PY{o}{=} \PY{n}{make\PYZus{}system}\PY{p}{(}\PY{n}{V}\PY{o}{=}\PY{l+m+mi}{7700}\PY{p}{,} \PY{n}{h}\PY{o}{=}\PY{l+m+mi}{300000}\PY{p}{,} \PY{n}{ρ}\PY{o}{=}\PY{l+m+mf}{0.0000000000258}\PY{p}{,} \PY{n}{Θ}\PY{o}{=}\PY{l+m+mf}{0.122173}\PY{p}{,} \PY{n}{dt}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}490}]:} V                                                          7700
+          h                                                        300000
+          ρ                                                      2.58e-11
+          dt                                                            1
+          init\_earth    KE    262565765000
+          PE     23293574582
+          ME    28{\ldots}
+          init\_moon     KE    518646806594
+          PE     23293574582
+          ME    54{\ldots}
+          init\_mars     KE    575527860000
+          PE     23293574582
+          ME    28{\ldots}
+          t\_0                                                           0
+          Θ                                                      0.122173
+          t\_end                                                       500
+          dtype: object
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}491}]:} \PY{k+kn}{import} \PY{n+nn}{math}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}492}]:} \PY{k}{def} \PY{n+nf}{update\PYZus{}func\PYZus{}earth}\PY{p}{(}\PY{n}{state}\PY{p}{,} \PY{n}{t}\PY{p}{,} \PY{n}{system\PYZus{}earth}\PY{p}{)}\PY{p}{:}
+              
+              \PY{n}{KE}\PY{p}{,} \PY{n}{PE}\PY{p}{,} \PY{n}{ME}\PY{p}{,} \PY{n}{HS}\PY{p}{,} \PY{n}{HA} \PY{o}{=} \PY{n}{state}
+              
+              \PY{n}{dt} \PY{o}{=} \PY{l+m+mi}{1}
+              
+              \PY{n}{dHSdt} \PY{o}{=} \PY{p}{(}\PY{l+m+mf}{1.83} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{10} \PY{o}{*}\PY{o}{*} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{n}{system\PYZus{}earth}\PY{o}{.}\PY{n}{V} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{3}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{p}{(}\PY{n}{system\PYZus{}earth}\PY{o}{.}\PY{n}{ρ}\PY{o}{/}\PY{n}{r}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{)}
+              \PY{n}{dVdt} \PY{o}{=} \PY{p}{(}\PY{n}{m} \PY{o}{*} \PY{n}{g} \PY{o}{*} \PY{n}{math}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{system\PYZus{}earth}\PY{o}{.}\PY{n}{Θ}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{l+m+mf}{0.5} \PY{o}{*} \PY{n}{system\PYZus{}earth}\PY{o}{.}\PY{n}{ρ} \PY{o}{*} \PY{p}{(}\PY{n}{system\PYZus{}earth}\PY{o}{.}\PY{n}{V} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)} \PY{o}{*} \PY{l+m+mf}{3.14} \PY{o}{*} \PY{p}{(}\PY{n}{r} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)} \PY{o}{*} \PY{n}{Cd}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{n}{m}
+              \PY{n}{dKEdt} \PY{o}{=} \PY{l+m+mf}{0.5} \PY{o}{*} \PY{n}{m} \PY{o}{*} \PY{p}{(}\PY{n}{dVdt} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)} 
+              \PY{n}{dhdt} \PY{o}{=} \PY{n}{system\PYZus{}earth}\PY{o}{.}\PY{n}{V} \PY{o}{*} \PY{n}{math}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{system\PYZus{}earth}\PY{o}{.}\PY{n}{Θ}\PY{p}{)} \PY{o}{*} \PY{n}{dt}
+                  
+              \PY{k}{if} \PY{n}{h} \PY{o}{\PYZgt{}} \PY{l+m+mi}{300000}\PY{p}{:}
+                  \PY{n}{system\PYZus{}earth}\PY{o}{.}\PY{n}{ρ} \PY{o}{=} \PY{l+m+mf}{1.870000e\PYZhy{}11}
+              \PY{k}{if} \PY{l+m+mi}{300000} \PY{o}{\PYZgt{}} \PY{n}{h} \PY{o}{\PYZgt{}} \PY{l+m+mi}{250000}\PY{p}{:}
+                  \PY{n}{system\PYZus{}earth}\PY{o}{.}\PY{n}{ρ} \PY{o}{=} \PY{l+m+mf}{5.970000e\PYZhy{}11}
+              \PY{k}{if} \PY{l+m+mi}{250000} \PY{o}{\PYZgt{}} \PY{n}{h} \PY{o}{\PYZgt{}} \PY{l+m+mi}{200000}\PY{p}{:}
+                  \PY{n}{system\PYZus{}earth}\PY{o}{.}\PY{n}{ρ} \PY{o}{=} \PY{l+m+mf}{2.410000e\PYZhy{}10}
+              \PY{k}{if} \PY{l+m+mi}{200000} \PY{o}{\PYZgt{}} \PY{n}{h} \PY{o}{\PYZgt{}} \PY{l+m+mi}{150000}\PY{p}{:}
+                  \PY{n}{system\PYZus{}earth}\PY{o}{.}\PY{n}{ρ} \PY{o}{=} \PY{l+m+mf}{1.730000e\PYZhy{}09}
+              \PY{k}{if} \PY{l+m+mi}{150000} \PY{o}{\PYZgt{}} \PY{n}{h} \PY{o}{\PYZgt{}} \PY{l+m+mi}{100000}\PY{p}{:}
+                  \PY{n}{system\PYZus{}earth}\PY{o}{.}\PY{n}{ρ} \PY{o}{=} \PY{l+m+mf}{5.250000e\PYZhy{}07}
+              \PY{k}{if} \PY{l+m+mi}{100000} \PY{o}{\PYZgt{}} \PY{n}{h} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                  \PY{n}{system\PYZus{}earth}\PY{o}{.}\PY{n}{ρ} \PY{o}{=} \PY{l+m+mf}{1.225000e+00}
+                  
+              \PY{n}{dh} \PY{o}{=} \PY{n}{dhdt}\PY{o}{*}\PY{n}{dt}
+              \PY{n}{dHS} \PY{o}{=} \PY{n}{dHSdt}\PY{o}{*}\PY{n}{dt}
+              \PY{n}{dPE} \PY{o}{=} \PY{p}{(}\PY{n}{m} \PY{o}{*} \PY{n}{g} \PY{o}{*} \PY{n}{dhdt} \PY{o}{*} \PY{n}{dt}\PY{p}{)}
+              \PY{n}{dKE} \PY{o}{=} \PY{n}{dKEdt}\PY{o}{*}\PY{n}{dt}
+              \PY{n}{dV} \PY{o}{=} \PY{n}{dVdt}\PY{o}{*}\PY{n}{dt}
+                  
+              \PY{n}{system\PYZus{}earth}\PY{o}{.}\PY{n}{V} \PY{o}{=} \PY{n}{system\PYZus{}earth}\PY{o}{.}\PY{n}{V} \PY{o}{\PYZhy{}} \PY{n}{dV}
+              \PY{n}{system\PYZus{}earth}\PY{o}{.}\PY{n}{h} \PY{o}{=} \PY{n}{system\PYZus{}earth}\PY{o}{.}\PY{n}{h} \PY{o}{\PYZhy{}} \PY{n}{dh}
+              \PY{n}{HS} \PY{o}{=} \PY{n}{HS} \PY{o}{+} \PY{n}{dHS}
+              \PY{n}{ME} \PY{o}{=} \PY{n}{ME} \PY{o}{\PYZhy{}} \PY{n}{dKE} \PY{o}{\PYZhy{}} \PY{n}{dPE}
+              \PY{n}{PE} \PY{o}{=} \PY{n}{PE} \PY{o}{\PYZhy{}} \PY{n}{dPE}
+              \PY{n}{KE} \PY{o}{=} \PY{n}{KE} \PY{o}{\PYZhy{}} \PY{n}{dKE}
+              \PY{n}{HA} \PY{o}{=} \PY{n}{ME} \PY{o}{\PYZhy{}} \PY{n}{HS}
+              
+              \PY{c+c1}{\PYZsh{}\PYZsh{}if PE\PYZlt{}0:}
+              \PY{c+c1}{\PYZsh{}\PYZsh{}    print(HS)}
+              
+              \PY{k}{return} \PY{n}{State}\PY{p}{(}\PY{n}{KE}\PY{o}{=}\PY{n}{KE}\PY{p}{,} \PY{n}{PE}\PY{o}{=}\PY{n}{PE}\PY{p}{,} \PY{n}{ME}\PY{o}{=}\PY{n}{ME}\PY{p}{,} \PY{n}{HS}\PY{o}{=}\PY{n}{HS}\PY{p}{,} \PY{n}{HA}\PY{o}{=}\PY{n}{HA}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}493}]:} \PY{k}{def} \PY{n+nf}{run\PYZus{}simulation\PYZus{}earth}\PY{p}{(}\PY{n}{system\PYZus{}earth}\PY{p}{,} \PY{n}{update\PYZus{}func\PYZus{}earth}\PY{p}{)}\PY{p}{:}
+              \PY{n}{unpack}\PY{p}{(}\PY{n}{system\PYZus{}earth}\PY{p}{)}
+              
+              \PY{n}{frame\PYZus{}earth} \PY{o}{=} \PY{n}{TimeFrame}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{n}{init\PYZus{}earth}\PY{o}{.}\PY{n}{index}\PY{p}{)}
+              \PY{n}{frame\PYZus{}earth}\PY{o}{.}\PY{n}{row}\PY{p}{[}\PY{n}{t\PYZus{}0}\PY{p}{]} \PY{o}{=} \PY{n}{init\PYZus{}earth}
+              
+              \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n}{linrange}\PY{p}{(}\PY{n}{t\PYZus{}0}\PY{p}{,} \PY{n}{t\PYZus{}end}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{frame\PYZus{}earth}\PY{o}{.}\PY{n}{row}\PY{p}{[}\PY{n}{t}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{update\PYZus{}func\PYZus{}earth}\PY{p}{(}\PY{n}{frame\PYZus{}earth}\PY{o}{.}\PY{n}{row}\PY{p}{[}\PY{n}{t}\PY{p}{]}\PY{p}{,} \PY{n}{t}\PY{p}{,} \PY{n}{system\PYZus{}earth}\PY{p}{)}
+                  
+              \PY{k}{return} \PY{n}{frame\PYZus{}earth}
+\end{Verbatim}
+
+
+    \hypertarget{results-of-the-first-simulation---energy-conservation-for-the-capsule-system-re-entering-earth-at-a-constant-angle-of-trajectory-of-6}{%
+\section{Results of the first simulation - Energy Conservation for the
+capsule system re-entering Earth at a constant angle of trajectory of
+6°}\label{results-of-the-first-simulation---energy-conservation-for-the-capsule-system-re-entering-earth-at-a-constant-angle-of-trajectory-of-6}}
+
+    Heat generated on the heat shield of the capsule should increase from an
+initial amount of 0 joules.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}494}]:} \PY{n}{system\PYZus{}earth}\PY{o}{.}\PY{n}{t\PYZus{}end} \PY{o}{=} \PY{l+m+mi}{292}
+          \PY{n}{updated\PYZus{}factors} \PY{o}{=} \PY{n}{run\PYZus{}simulation\PYZus{}earth}\PY{p}{(}\PY{n}{system\PYZus{}earth}\PY{p}{,} \PY{n}{update\PYZus{}func\PYZus{}earth}\PY{p}{)}
+          \PY{n}{updated\PYZus{}factors}\PY{o}{.}\PY{n}{HS}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+          
+          \PY{n}{decorate}\PY{p}{(}\PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Heat produced on the heat shield}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                   \PY{n}{xlabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time (sec)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                   \PY{n}{ylabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Joules of heat produced}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{savefig}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figs/chap01\PYZhy{}fig01.pdf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Saving figure to file figs/chap01-fig01.pdf
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_24_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Heat lost to the atmosphere in Joules
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}495}]:} \PY{n}{updated\PYZus{}factors}\PY{o}{.}\PY{n}{HA}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+          
+          \PY{n}{decorate}\PY{p}{(}\PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Heat lost to the atmosphere}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                   \PY{n}{xlabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time (sec)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                   \PY{n}{ylabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Joules of heat produced}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{savefig}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figs/chap01\PYZhy{}fig01.pdf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Saving figure to file figs/chap01-fig01.pdf
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The Kinetic Energy of the capsule should decrease due to the frictional
+forces of the atmosphere. The velocity of the capsule decreases until it
+reaches terminal velocity and the parachutes are deployed.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}496}]:} \PY{n}{updated\PYZus{}factors}\PY{o}{.}\PY{n}{KE}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+          
+          \PY{n}{decorate}\PY{p}{(}\PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Kinetic Energy of the Capsule}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                   \PY{n}{xlabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time (sec)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                   \PY{n}{ylabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Joules of Energy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{savefig}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figs/chap01\PYZhy{}fig01.pdf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Saving figure to file figs/chap01-fig01.pdf
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The Potential Energy of the capsule should decrease due to the descent
+in height with respect to sea level on Earth.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}497}]:} \PY{n}{updated\PYZus{}factors}\PY{o}{.}\PY{n}{PE}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+          
+          \PY{n}{decorate}\PY{p}{(}\PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Potential Energy of the Capsule}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                   \PY{n}{xlabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time (sec)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                   \PY{n}{ylabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Joules of Energy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{savefig}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figs/chap01\PYZhy{}fig01.pdf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Saving figure to file figs/chap01-fig01.pdf
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_30_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The Mechanical Energy should decrease in general, because both the
+Potential Energy as well as the Kinetic Energy decrease as the capsule
+re-enters Earth.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}498}]:} \PY{n}{updated\PYZus{}factors}\PY{o}{.}\PY{n}{ME}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+          
+          \PY{n}{decorate}\PY{p}{(}\PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Total Mechanical Energy of the Capsule system}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                   \PY{n}{xlabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time (sec)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                   \PY{n}{ylabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Joules of Energy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{savefig}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figs/chap01\PYZhy{}fig01.pdf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Saving figure to file figs/chap01-fig01.pdf
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_32_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{re-entry-from-moon}{%
+\section{Re-entry from Moon}\label{re-entry-from-moon}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}499}]:} \PY{n}{system\PYZus{}moon} \PY{o}{=} \PY{n}{make\PYZus{}system}\PY{p}{(}\PY{n}{V}\PY{o}{=}\PY{l+m+mi}{10822}\PY{p}{,} \PY{n}{h}\PY{o}{=}\PY{l+m+mi}{300000}\PY{p}{,} \PY{n}{ρ}\PY{o}{=}\PY{l+m+mf}{0.0000000000258}\PY{p}{,} \PY{n}{Θ}\PY{o}{=}\PY{l+m+mf}{0.122173}\PY{p}{,} \PY{n}{dt}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}499}]:} V                                                         10822
+          h                                                        300000
+          ρ                                                      2.58e-11
+          dt                                                            1
+          init\_earth    KE    262565765000
+          PE     23293574582
+          ME    28{\ldots}
+          init\_moon     KE    518646806594
+          PE     23293574582
+          ME    54{\ldots}
+          init\_mars     KE    575527860000
+          PE     23293574582
+          ME    28{\ldots}
+          t\_0                                                           0
+          Θ                                                      0.122173
+          t\_end                                                       500
+          dtype: object
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}500}]:} \PY{k}{def} \PY{n+nf}{update\PYZus{}func\PYZus{}moon}\PY{p}{(}\PY{n}{state}\PY{p}{,} \PY{n}{t}\PY{p}{,} \PY{n}{system\PYZus{}moon}\PY{p}{)}\PY{p}{:}
+              
+              \PY{n}{KE}\PY{p}{,} \PY{n}{PE}\PY{p}{,} \PY{n}{ME}\PY{p}{,} \PY{n}{HS}\PY{p}{,} \PY{n}{HA} \PY{o}{=} \PY{n}{state}
+              
+              \PY{n}{dt} \PY{o}{=} \PY{l+m+mi}{1}
+              
+              \PY{n}{dHSdt} \PY{o}{=} \PY{p}{(}\PY{l+m+mf}{1.83} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{10} \PY{o}{*}\PY{o}{*} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{n}{system\PYZus{}moon}\PY{o}{.}\PY{n}{V} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{3}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{p}{(}\PY{n}{system\PYZus{}earth}\PY{o}{.}\PY{n}{ρ}\PY{o}{/}\PY{n}{r}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{)}
+              \PY{n}{dVdt} \PY{o}{=} \PY{p}{(}\PY{n}{m} \PY{o}{*} \PY{n}{g} \PY{o}{*} \PY{n}{math}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{system\PYZus{}moon}\PY{o}{.}\PY{n}{Θ}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{l+m+mf}{0.5} \PY{o}{*} \PY{n}{system\PYZus{}earth}\PY{o}{.}\PY{n}{ρ} \PY{o}{*} \PY{p}{(}\PY{n}{system\PYZus{}moon}\PY{o}{.}\PY{n}{V} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)} \PY{o}{*} \PY{l+m+mf}{3.14} \PY{o}{*} \PY{p}{(}\PY{n}{r} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)} \PY{o}{*} \PY{n}{Cd}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{n}{m}
+              \PY{n}{dKEdt} \PY{o}{=} \PY{l+m+mf}{0.5} \PY{o}{*} \PY{n}{m} \PY{o}{*} \PY{p}{(}\PY{n}{dVdt} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)} 
+              \PY{n}{dhdt} \PY{o}{=} \PY{n}{system\PYZus{}moon}\PY{o}{.}\PY{n}{V} \PY{o}{*} \PY{n}{math}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{system\PYZus{}moon}\PY{o}{.}\PY{n}{Θ}\PY{p}{)} \PY{o}{*} \PY{n}{dt}
+                  
+              \PY{k}{if} \PY{n}{h} \PY{o}{\PYZgt{}} \PY{l+m+mi}{300000}\PY{p}{:}
+                  \PY{n}{system\PYZus{}earth}\PY{o}{.}\PY{n}{ρ} \PY{o}{=} \PY{l+m+mf}{1.870000e\PYZhy{}11}
+              \PY{k}{if} \PY{l+m+mi}{300000} \PY{o}{\PYZgt{}} \PY{n}{h} \PY{o}{\PYZgt{}} \PY{l+m+mi}{250000}\PY{p}{:}
+                  \PY{n}{system\PYZus{}earth}\PY{o}{.}\PY{n}{ρ} \PY{o}{=} \PY{l+m+mf}{5.970000e\PYZhy{}11}
+              \PY{k}{if} \PY{l+m+mi}{250000} \PY{o}{\PYZgt{}} \PY{n}{h} \PY{o}{\PYZgt{}} \PY{l+m+mi}{200000}\PY{p}{:}
+                  \PY{n}{system\PYZus{}earth}\PY{o}{.}\PY{n}{ρ} \PY{o}{=} \PY{l+m+mf}{2.410000e\PYZhy{}10}
+              \PY{k}{if} \PY{l+m+mi}{200000} \PY{o}{\PYZgt{}} \PY{n}{h} \PY{o}{\PYZgt{}} \PY{l+m+mi}{150000}\PY{p}{:}
+                  \PY{n}{system\PYZus{}earth}\PY{o}{.}\PY{n}{ρ} \PY{o}{=} \PY{l+m+mf}{1.730000e\PYZhy{}09}
+              \PY{k}{if} \PY{l+m+mi}{150000} \PY{o}{\PYZgt{}} \PY{n}{h} \PY{o}{\PYZgt{}} \PY{l+m+mi}{100000}\PY{p}{:}
+                  \PY{n}{system\PYZus{}earth}\PY{o}{.}\PY{n}{ρ} \PY{o}{=} \PY{l+m+mf}{5.250000e\PYZhy{}07}
+              \PY{k}{if} \PY{l+m+mi}{100000} \PY{o}{\PYZgt{}} \PY{n}{h} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                  \PY{n}{system\PYZus{}earth}\PY{o}{.}\PY{n}{ρ} \PY{o}{=} \PY{l+m+mf}{1.225000e+00}
+                  
+              \PY{n}{dh} \PY{o}{=} \PY{n}{dhdt}\PY{o}{*}\PY{n}{dt}
+              \PY{n}{dHS} \PY{o}{=} \PY{n}{dHSdt}\PY{o}{*}\PY{n}{dt}
+              \PY{n}{dPE} \PY{o}{=} \PY{p}{(}\PY{n}{m} \PY{o}{*} \PY{n}{g} \PY{o}{*} \PY{n}{dhdt} \PY{o}{*} \PY{n}{dt}\PY{p}{)}
+              \PY{n}{dKE} \PY{o}{=} \PY{n}{dKEdt}\PY{o}{*}\PY{n}{dt}
+              \PY{n}{dV} \PY{o}{=} \PY{n}{dVdt}\PY{o}{*}\PY{n}{dt}
+                  
+              \PY{n}{system\PYZus{}moon}\PY{o}{.}\PY{n}{V} \PY{o}{=} \PY{n}{system\PYZus{}moon}\PY{o}{.}\PY{n}{V} \PY{o}{\PYZhy{}} \PY{n}{dV}
+              \PY{n}{system\PYZus{}moon}\PY{o}{.}\PY{n}{h} \PY{o}{=} \PY{n}{system\PYZus{}moon}\PY{o}{.}\PY{n}{h} \PY{o}{\PYZhy{}} \PY{n}{dh}
+              \PY{n}{HS} \PY{o}{=} \PY{n}{HS} \PY{o}{+} \PY{n}{dHS}
+              \PY{n}{ME} \PY{o}{=} \PY{n}{ME} \PY{o}{\PYZhy{}} \PY{n}{dKE} \PY{o}{\PYZhy{}} \PY{n}{dPE}
+              \PY{n}{PE} \PY{o}{=} \PY{n}{PE} \PY{o}{\PYZhy{}} \PY{n}{dPE}
+              \PY{n}{KE} \PY{o}{=} \PY{n}{KE} \PY{o}{\PYZhy{}} \PY{n}{dKE}
+              \PY{n}{HA} \PY{o}{=} \PY{n}{ME} \PY{o}{\PYZhy{}} \PY{n}{HS}
+                  
+              \PY{c+c1}{\PYZsh{}\PYZsh{}if PE\PYZlt{}0:}
+              \PY{c+c1}{\PYZsh{}\PYZsh{}    print(HS)}
+              
+              \PY{k}{return} \PY{n}{State}\PY{p}{(}\PY{n}{KE}\PY{o}{=}\PY{n}{KE}\PY{p}{,} \PY{n}{PE}\PY{o}{=}\PY{n}{PE}\PY{p}{,} \PY{n}{ME}\PY{o}{=}\PY{n}{ME}\PY{p}{,} \PY{n}{HS}\PY{o}{=}\PY{n}{HS}\PY{p}{,} \PY{n}{HA}\PY{o}{=}\PY{n}{HA}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}501}]:} \PY{k}{def} \PY{n+nf}{run\PYZus{}simulation\PYZus{}moon}\PY{p}{(}\PY{n}{system\PYZus{}moon}\PY{p}{,} \PY{n}{update\PYZus{}func\PYZus{}moon}\PY{p}{)}\PY{p}{:}
+              \PY{n}{unpack}\PY{p}{(}\PY{n}{system\PYZus{}moon}\PY{p}{)}
+              
+              \PY{n}{frame\PYZus{}moon} \PY{o}{=} \PY{n}{TimeFrame}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{n}{init\PYZus{}moon}\PY{o}{.}\PY{n}{index}\PY{p}{)}
+              \PY{n}{frame\PYZus{}moon}\PY{o}{.}\PY{n}{row}\PY{p}{[}\PY{n}{t\PYZus{}0}\PY{p}{]} \PY{o}{=} \PY{n}{init\PYZus{}moon}
+              
+              \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n}{linrange}\PY{p}{(}\PY{n}{t\PYZus{}0}\PY{p}{,} \PY{n}{t\PYZus{}end}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{frame\PYZus{}moon}\PY{o}{.}\PY{n}{row}\PY{p}{[}\PY{n}{t}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{update\PYZus{}func\PYZus{}moon}\PY{p}{(}\PY{n}{frame\PYZus{}moon}\PY{o}{.}\PY{n}{row}\PY{p}{[}\PY{n}{t}\PY{p}{]}\PY{p}{,} \PY{n}{t}\PY{p}{,} \PY{n}{system\PYZus{}moon}\PY{p}{)}
+                  
+              \PY{k}{return} \PY{n}{frame\PYZus{}moon}
+\end{Verbatim}
+
+
+    \hypertarget{results-of-the-second-simulation---energy-conservation-for-the-capsule-system-re-entering-earth-returning-from-moon-at-a-constant-angle-of-trajectory-of-6}{%
+\section{Results of the second simulation - Energy Conservation for the
+capsule system re-entering Earth returning from Moon at a constant angle
+of trajectory of
+6°}\label{results-of-the-second-simulation---energy-conservation-for-the-capsule-system-re-entering-earth-returning-from-moon-at-a-constant-angle-of-trajectory-of-6}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}502}]:} \PY{n}{system\PYZus{}moon}\PY{o}{.}\PY{n}{t\PYZus{}end}\PY{o}{=}\PY{l+m+mi}{205}
+          \PY{n}{updated\PYZus{}factors\PYZus{}moon} \PY{o}{=} \PY{n}{run\PYZus{}simulation\PYZus{}moon}\PY{p}{(}\PY{n}{system\PYZus{}moon}\PY{p}{,} \PY{n}{update\PYZus{}func\PYZus{}moon}\PY{p}{)}
+          \PY{n}{updated\PYZus{}factors\PYZus{}moon}\PY{o}{.}\PY{n}{HS}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+          
+          \PY{n}{decorate}\PY{p}{(}\PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Heat produced on the heat shield}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                   \PY{n}{xlabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time (sec)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                   \PY{n}{ylabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Joules of heat produced}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{savefig}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figs/chap01\PYZhy{}fig01.pdf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Saving figure to file figs/chap01-fig01.pdf
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_38_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}503}]:} \PY{n}{updated\PYZus{}factors\PYZus{}moon}\PY{o}{.}\PY{n}{HA}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+          
+          \PY{n}{decorate}\PY{p}{(}\PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Heat lost to the atmosphere}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                   \PY{n}{xlabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time (sec)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                   \PY{n}{ylabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Joules of heat produced}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{savefig}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figs/chap01\PYZhy{}fig01.pdf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Saving figure to file figs/chap01-fig01.pdf
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_39_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}504}]:} \PY{n}{updated\PYZus{}factors\PYZus{}moon}\PY{o}{.}\PY{n}{KE}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+          
+          \PY{n}{decorate}\PY{p}{(}\PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Kinetic Energy of the Capsule}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                   \PY{n}{xlabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time (sec)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                   \PY{n}{ylabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Joules of Energy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{savefig}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figs/chap01\PYZhy{}fig01.pdf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Saving figure to file figs/chap01-fig01.pdf
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_40_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}505}]:} \PY{n}{updated\PYZus{}factors\PYZus{}moon}\PY{o}{.}\PY{n}{PE}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+          
+          \PY{n}{decorate}\PY{p}{(}\PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Potential Energy of the Capsule}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                   \PY{n}{xlabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time (sec)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                   \PY{n}{ylabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Joules of Energy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{savefig}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figs/chap01\PYZhy{}fig01.pdf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Saving figure to file figs/chap01-fig01.pdf
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_41_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}506}]:} \PY{n}{updated\PYZus{}factors\PYZus{}moon}\PY{o}{.}\PY{n}{ME}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+          
+          \PY{n}{decorate}\PY{p}{(}\PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Total Mechanical Energy of the Capsule system}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                   \PY{n}{xlabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time (sec)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                   \PY{n}{ylabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Joules of Energy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{savefig}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figs/chap01\PYZhy{}fig01.pdf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Saving figure to file figs/chap01-fig01.pdf
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_42_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{re-entry-from-mars}{%
+\section{Re-entry from Mars}\label{re-entry-from-mars}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}507}]:} \PY{n}{system\PYZus{}mars} \PY{o}{=} \PY{n}{make\PYZus{}system}\PY{p}{(}\PY{n}{V}\PY{o}{=}\PY{l+m+mi}{11400}\PY{p}{,} \PY{n}{h}\PY{o}{=}\PY{l+m+mi}{300000}\PY{p}{,} \PY{n}{ρ}\PY{o}{=}\PY{l+m+mf}{0.0000000000258}\PY{p}{,} \PY{n}{Θ}\PY{o}{=}\PY{l+m+mf}{0.122173}\PY{p}{,} \PY{n}{dt}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}507}]:} V                                                         11400
+          h                                                        300000
+          ρ                                                      2.58e-11
+          dt                                                            1
+          init\_earth    KE    262565765000
+          PE     23293574582
+          ME    28{\ldots}
+          init\_moon     KE    518646806594
+          PE     23293574582
+          ME    54{\ldots}
+          init\_mars     KE    575527860000
+          PE     23293574582
+          ME    28{\ldots}
+          t\_0                                                           0
+          Θ                                                      0.122173
+          t\_end                                                       500
+          dtype: object
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}508}]:} \PY{k}{def} \PY{n+nf}{update\PYZus{}func\PYZus{}mars}\PY{p}{(}\PY{n}{state}\PY{p}{,} \PY{n}{t}\PY{p}{,} \PY{n}{system\PYZus{}mars}\PY{p}{)}\PY{p}{:}
+              
+              \PY{n}{KE}\PY{p}{,} \PY{n}{PE}\PY{p}{,} \PY{n}{ME}\PY{p}{,} \PY{n}{HS}\PY{p}{,} \PY{n}{HA} \PY{o}{=} \PY{n}{state}
+              
+              \PY{n}{dt} \PY{o}{=} \PY{l+m+mi}{1}
+              
+              \PY{n}{dHSdt} \PY{o}{=} \PY{p}{(}\PY{l+m+mf}{1.83} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{10} \PY{o}{*}\PY{o}{*} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{n}{system\PYZus{}mars}\PY{o}{.}\PY{n}{V} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{3}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{p}{(}\PY{n}{system\PYZus{}earth}\PY{o}{.}\PY{n}{ρ}\PY{o}{/}\PY{n}{r}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{)}
+              \PY{n}{dVdt} \PY{o}{=} \PY{p}{(}\PY{n}{m} \PY{o}{*} \PY{n}{g} \PY{o}{*} \PY{n}{math}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{system\PYZus{}mars}\PY{o}{.}\PY{n}{Θ}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{l+m+mf}{0.5} \PY{o}{*} \PY{n}{system\PYZus{}earth}\PY{o}{.}\PY{n}{ρ} \PY{o}{*} \PY{p}{(}\PY{n}{system\PYZus{}mars}\PY{o}{.}\PY{n}{V} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)} \PY{o}{*} \PY{l+m+mf}{3.14} \PY{o}{*} \PY{p}{(}\PY{n}{r} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)} \PY{o}{*} \PY{n}{Cd}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{n}{m}
+              \PY{n}{dKEdt} \PY{o}{=} \PY{l+m+mf}{0.5} \PY{o}{*} \PY{n}{m} \PY{o}{*} \PY{p}{(}\PY{n}{dVdt} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)} 
+              \PY{n}{dhdt} \PY{o}{=} \PY{n}{system\PYZus{}mars}\PY{o}{.}\PY{n}{V} \PY{o}{*} \PY{n}{math}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{system\PYZus{}mars}\PY{o}{.}\PY{n}{Θ}\PY{p}{)} \PY{o}{*} \PY{n}{dt}
+                  
+              \PY{k}{if} \PY{n}{h} \PY{o}{\PYZgt{}} \PY{l+m+mi}{300000}\PY{p}{:}
+                  \PY{n}{system\PYZus{}earth}\PY{o}{.}\PY{n}{ρ} \PY{o}{=} \PY{l+m+mf}{1.870000e\PYZhy{}11}
+              \PY{k}{if} \PY{l+m+mi}{300000} \PY{o}{\PYZgt{}} \PY{n}{h} \PY{o}{\PYZgt{}} \PY{l+m+mi}{250000}\PY{p}{:}
+                  \PY{n}{system\PYZus{}earth}\PY{o}{.}\PY{n}{ρ} \PY{o}{=} \PY{l+m+mf}{5.970000e\PYZhy{}11}
+              \PY{k}{if} \PY{l+m+mi}{250000} \PY{o}{\PYZgt{}} \PY{n}{h} \PY{o}{\PYZgt{}} \PY{l+m+mi}{200000}\PY{p}{:}
+                  \PY{n}{system\PYZus{}earth}\PY{o}{.}\PY{n}{ρ} \PY{o}{=} \PY{l+m+mf}{2.410000e\PYZhy{}10}
+              \PY{k}{if} \PY{l+m+mi}{200000} \PY{o}{\PYZgt{}} \PY{n}{h} \PY{o}{\PYZgt{}} \PY{l+m+mi}{150000}\PY{p}{:}
+                  \PY{n}{system\PYZus{}earth}\PY{o}{.}\PY{n}{ρ} \PY{o}{=} \PY{l+m+mf}{1.730000e\PYZhy{}09}
+              \PY{k}{if} \PY{l+m+mi}{150000} \PY{o}{\PYZgt{}} \PY{n}{h} \PY{o}{\PYZgt{}} \PY{l+m+mi}{100000}\PY{p}{:}
+                  \PY{n}{system\PYZus{}earth}\PY{o}{.}\PY{n}{ρ} \PY{o}{=} \PY{l+m+mf}{5.250000e\PYZhy{}07}
+              \PY{k}{if} \PY{l+m+mi}{100000} \PY{o}{\PYZgt{}} \PY{n}{h} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                  \PY{n}{system\PYZus{}earth}\PY{o}{.}\PY{n}{ρ} \PY{o}{=} \PY{l+m+mf}{1.225000e+00}
+                  
+              \PY{n}{dh} \PY{o}{=} \PY{n}{dhdt}\PY{o}{*}\PY{n}{dt}
+              \PY{n}{dHS} \PY{o}{=} \PY{n}{dHSdt}\PY{o}{*}\PY{n}{dt}
+              \PY{n}{dPE} \PY{o}{=} \PY{p}{(}\PY{n}{m} \PY{o}{*} \PY{n}{g} \PY{o}{*} \PY{n}{dhdt} \PY{o}{*} \PY{n}{dt}\PY{p}{)}
+              \PY{n}{dKE} \PY{o}{=} \PY{n}{dKEdt}\PY{o}{*}\PY{n}{dt}
+              \PY{n}{dV} \PY{o}{=} \PY{n}{dVdt}\PY{o}{*}\PY{n}{dt}
+                  
+              \PY{n}{system\PYZus{}mars}\PY{o}{.}\PY{n}{V} \PY{o}{=} \PY{n}{system\PYZus{}mars}\PY{o}{.}\PY{n}{V} \PY{o}{\PYZhy{}} \PY{n}{dV}
+              \PY{n}{system\PYZus{}mars}\PY{o}{.}\PY{n}{h} \PY{o}{=} \PY{n}{system\PYZus{}mars}\PY{o}{.}\PY{n}{h} \PY{o}{\PYZhy{}} \PY{n}{dh}
+              \PY{n}{HS} \PY{o}{=} \PY{n}{HS} \PY{o}{+} \PY{n}{dHS}
+              \PY{n}{ME} \PY{o}{=} \PY{n}{ME} \PY{o}{\PYZhy{}} \PY{n}{dKE} \PY{o}{\PYZhy{}} \PY{n}{dPE}
+              \PY{n}{PE} \PY{o}{=} \PY{n}{PE} \PY{o}{\PYZhy{}} \PY{n}{dPE}
+              \PY{n}{KE} \PY{o}{=} \PY{n}{KE} \PY{o}{\PYZhy{}} \PY{n}{dKE}
+              \PY{n}{HA} \PY{o}{=} \PY{n}{ME} \PY{o}{\PYZhy{}} \PY{n}{HS}
+              
+              \PY{c+c1}{\PYZsh{}\PYZsh{}if PE\PYZlt{}0:}
+              \PY{c+c1}{\PYZsh{}\PYZsh{}    print(HS)}
+              
+              \PY{k}{return} \PY{n}{State}\PY{p}{(}\PY{n}{KE}\PY{o}{=}\PY{n}{KE}\PY{p}{,} \PY{n}{PE}\PY{o}{=}\PY{n}{PE}\PY{p}{,} \PY{n}{ME}\PY{o}{=}\PY{n}{ME}\PY{p}{,} \PY{n}{HS}\PY{o}{=}\PY{n}{HS}\PY{p}{,} \PY{n}{HA}\PY{o}{=}\PY{n}{HA}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}509}]:} \PY{k}{def} \PY{n+nf}{run\PYZus{}simulation\PYZus{}mars}\PY{p}{(}\PY{n}{system\PYZus{}mars}\PY{p}{,} \PY{n}{update\PYZus{}func\PYZus{}mars}\PY{p}{)}\PY{p}{:}
+              \PY{n}{unpack}\PY{p}{(}\PY{n}{system\PYZus{}mars}\PY{p}{)}
+              
+              \PY{n}{frame\PYZus{}mars} \PY{o}{=} \PY{n}{TimeFrame}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{n}{init\PYZus{}mars}\PY{o}{.}\PY{n}{index}\PY{p}{)}
+              \PY{n}{frame\PYZus{}mars}\PY{o}{.}\PY{n}{row}\PY{p}{[}\PY{n}{t\PYZus{}0}\PY{p}{]} \PY{o}{=} \PY{n}{init\PYZus{}mars}
+              
+              \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n}{linrange}\PY{p}{(}\PY{n}{t\PYZus{}0}\PY{p}{,} \PY{n}{t\PYZus{}end}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{frame\PYZus{}mars}\PY{o}{.}\PY{n}{row}\PY{p}{[}\PY{n}{t}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{update\PYZus{}func\PYZus{}mars}\PY{p}{(}\PY{n}{frame\PYZus{}mars}\PY{o}{.}\PY{n}{row}\PY{p}{[}\PY{n}{t}\PY{p}{]}\PY{p}{,} \PY{n}{t}\PY{p}{,} \PY{n}{system\PYZus{}mars}\PY{p}{)}
+                  
+              \PY{k}{return} \PY{n}{frame\PYZus{}mars}
+\end{Verbatim}
+
+
+    \hypertarget{results-of-the-third-simulation---energy-conservation-for-the-capsule-system-re-entering-earth-returning-from-mars-at-a-constant-angle-of-trajectory-of-6}{%
+\section{Results of the third simulation - Energy Conservation for the
+capsule system re-entering Earth returning from Mars at a constant angle
+of trajectory of
+6°}\label{results-of-the-third-simulation---energy-conservation-for-the-capsule-system-re-entering-earth-returning-from-mars-at-a-constant-angle-of-trajectory-of-6}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}510}]:} \PY{n}{system\PYZus{}mars}\PY{o}{.}\PY{n}{t\PYZus{}end}\PY{o}{=}\PY{l+m+mi}{195}
+          \PY{n}{updated\PYZus{}factors\PYZus{}mars} \PY{o}{=} \PY{n}{run\PYZus{}simulation\PYZus{}mars}\PY{p}{(}\PY{n}{system\PYZus{}mars}\PY{p}{,} \PY{n}{update\PYZus{}func\PYZus{}mars}\PY{p}{)}
+          \PY{n}{updated\PYZus{}factors\PYZus{}mars}\PY{o}{.}\PY{n}{HS}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+          
+          \PY{n}{decorate}\PY{p}{(}\PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Heat produced on the heat shield}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                   \PY{n}{xlabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time (sec)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                   \PY{n}{ylabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Joules of heat produced}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{savefig}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figs/chap01\PYZhy{}fig01.pdf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Saving figure to file figs/chap01-fig01.pdf
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_48_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}511}]:} \PY{n}{updated\PYZus{}factors\PYZus{}mars}\PY{o}{.}\PY{n}{HA}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+          
+          \PY{n}{decorate}\PY{p}{(}\PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Heat lost to the atmosphere}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                   \PY{n}{xlabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time (sec)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                   \PY{n}{ylabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Joules of heat produced}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{savefig}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figs/chap01\PYZhy{}fig01.pdf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Saving figure to file figs/chap01-fig01.pdf
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_49_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}512}]:} \PY{n}{updated\PYZus{}factors\PYZus{}mars}\PY{o}{.}\PY{n}{KE}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+          
+          \PY{n}{decorate}\PY{p}{(}\PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Kinetic Energy of the Capsule}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                   \PY{n}{xlabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time (sec)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                   \PY{n}{ylabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Joules of Energy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{savefig}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figs/chap01\PYZhy{}fig01.pdf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Saving figure to file figs/chap01-fig01.pdf
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_50_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}513}]:} \PY{n}{updated\PYZus{}factors\PYZus{}mars}\PY{o}{.}\PY{n}{PE}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+          
+          \PY{n}{decorate}\PY{p}{(}\PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Potential Energy of the Capsule}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                   \PY{n}{xlabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time (sec)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                   \PY{n}{ylabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Joules of Energy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{savefig}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figs/chap01\PYZhy{}fig01.pdf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Saving figure to file figs/chap01-fig01.pdf
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_51_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}514}]:} \PY{n}{updated\PYZus{}factors\PYZus{}mars}\PY{o}{.}\PY{n}{ME}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+          
+          \PY{n}{decorate}\PY{p}{(}\PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Total Mechanical Energy of the Capsule system}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                   \PY{n}{xlabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time (sec)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                   \PY{n}{ylabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Joules of Energy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{savefig}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figs/chap01\PYZhy{}fig01.pdf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Saving figure to file figs/chap01-fig01.pdf
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_52_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{results}{%
+\section{Results}\label{results}}
+
+    \begin{figure}
+\centering
+\includegraphics{attachment:image.png}
+\caption{image.png}
+\end{figure}
+
+    We used the total heat produced during re-entry from the graphs to
+calculate the maximum temperature that the heat shield goes up to. The
+equation that was used was: Fourier's Law
+
+q = (k / s) A dT
+
+= U A dT (1)
+
+where
+
+q = heat transfer (J/s)
+
+k = Thermal Conductivity of material (W/m K)
+
+s = material thickness (m)
+
+A = heat transfer area (m\^{}2)
+
+U = k / s
+
+= Coefficient of Heat Transfer (m\^{}2.K)
+
+dT = t1 - t2 = temperature gradient
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}515}]:} \PY{n}{HS\PYZus{}orbit}\PY{o}{=} \PY{l+m+mf}{85389.78}\PY{p}{;} \PY{c+c1}{\PYZsh{}\PYZsh{} heat generated on the heat shield according to the data}
+          \PY{n}{HS\PYZus{}moon}\PY{o}{=}\PY{l+m+mi}{172464}\PY{p}{;}\PY{c+c1}{\PYZsh{}\PYZsh{} heat generated on the heat shield according to the data}
+          \PY{n}{HS\PYZus{}mars}\PY{o}{=}\PY{l+m+mf}{192448.98} \PY{c+c1}{\PYZsh{}\PYZsh{} heat generated on the heat shield according to the data}
+          \PY{n}{HSm} \PY{o}{=} \PY{l+m+mi}{36}\PY{p}{;} \PY{c+c1}{\PYZsh{}\PYZsh{} mass of heat shield}
+          \PY{n}{C} \PY{o}{=}\PY{l+m+mf}{1.26} \PY{p}{;} \PY{c+c1}{\PYZsh{}\PYZsh{} specific heat capacity of the heat shield }
+          \PY{n}{Ti} \PY{o}{=}\PY{l+m+mi}{4} \PY{p}{;} \PY{c+c1}{\PYZsh{}initial temperature of the heat shield in space (in Kelvin)}
+\end{Verbatim}
+
+
+    \begin{figure}
+\centering
+\includegraphics{attachment:image.png}
+\caption{image.png}
+\end{figure}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}516}]:} \PY{n}{Tf\PYZus{}orbit} \PY{o}{=} \PY{p}{(}\PY{n}{HS\PYZus{}orbit} \PY{o}{/} \PY{p}{(}\PY{n}{C} \PY{o}{*}\PY{n}{HSm}\PY{p}{)}\PY{p}{)}\PY{o}{+}\PY{n}{Ti}\PY{p}{;}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{Tf\PYZus{}orbit}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{K}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1886.4907407407406 K
+
+    \end{Verbatim}
+
+    The re-entry temprature of a capsule from orbit is about 1900K
+(https://www.spacex.com/news/2013/04/04/pica-heat-shield)
+
+    \begin{figure}
+\centering
+\includegraphics{attachment:image.png}
+\caption{image.png}
+\end{figure}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}517}]:} \PY{n}{Tf\PYZus{}moon} \PY{o}{=} \PY{p}{(}\PY{n}{HS\PYZus{}moon} \PY{o}{/} \PY{p}{(}\PY{n}{C} \PY{o}{*}\PY{n}{HSm}\PY{p}{)}\PY{p}{)}\PY{o}{+}\PY{n}{Ti}\PY{p}{;}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{Tf\PYZus{}moon}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{K}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+3806.1164021164022 K
+
+    \end{Verbatim}
+
+    The re-entry temprature of a capsule from orbit is about 3000K
+(https://science.howstuffworks.com/apollo-spacecraft7.htm)
+
+    \begin{figure}
+\centering
+\includegraphics{attachment:image.png}
+\caption{image.png}
+\end{figure}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}518}]:} \PY{n}{Tf\PYZus{}mars} \PY{o}{=} \PY{p}{(}\PY{n}{HS\PYZus{}mars} \PY{o}{/} \PY{p}{(}\PY{n}{C} \PY{o}{*}\PY{n}{HSm}\PY{p}{)}\PY{p}{)}\PY{o}{+}\PY{n}{Ti}\PY{p}{;}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{Tf\PYZus{}mars}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{K}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+4246.702380952382 K
+
+    \end{Verbatim}
+
+    The orion spacecraft experianced a temprture of 2500K at re-entry with
+80\% of the actual speed (9000m/s)
+(https://www.nasa.gov/feature/five-orion-technologies-that-will-help-us-get-home-from-mars)
+
+    \hypertarget{interpretations}{%
+\section{Interpretations}\label{interpretations}}
+
+    Simulation 1: The simulation of re-entry of the capsule from Earth's
+orbit is a reasonable result as compared to the data made available by
+SpaceX. According to this data, we know that the temperature of the heat
+shield after re-entry from Earth's orbit is about 1900K. Also, other
+space missions like NASA's Apollo spacecrafts had approximately the same
+maximum re-entry temperature.
+
+    Simulation 2: The simulation of re-entry of the capsule from the Moon's
+orbit can be considered a reasonable result as compared to the data made
+available by NASA's Apollo missions. According to this data, we know
+that the temperature of the heat shield after re-entry from Earth's
+orbit is about 3000K. Our data is close to 3800K. The difference of 800K
+could be possibly due to two factors:
+
+\begin{enumerate}
+\def\labelenumi{(\roman{enumi})}
+\tightlist
+\item
+  The Dragon Capsule is bigger than the Apollo Capsule, and
+\item
+  The limitations of our model.
+\end{enumerate}
+
+    Simulation 3: The simulation of re-entry of the capsule from Mars' orbit
+is very difficult to assess because none of the missions have actually
+been able to do this successfully. The closest estimate that we can get
+is by the tests of currently under development at SpaceX, the Orion
+Capsule which reached a temperature of 2500K on a test with 80\% of the
+actual speed (less than the re-entry speed of a lunar mission). Our data
+was slightly higher comparatively, which is probably due to the limited
+scope of this model.
+
+    \hypertarget{major-iterations}{%
+\section{Major Iterations}\label{major-iterations}}
+
+    Earlier, we were sweeping the values of the angle of trajectory Θ.
+However, this was not an ideal aspect of the model. That is because, if
+we swept the data at intervals of 0.1° between 5.3° and 7.7°, it would
+not make a major difference in the maximum temperature acquired by the
+heat shield. On the other hand, if we swept the data at intervals of 1°
+between 5.3° and 17.7°, it would include angles of trajectory more than
+7.7°, which would make the chances of survival for the astronauts close
+to 0.
+
+    \hypertarget{abstract}{%
+\section{Abstract}\label{abstract}}
+
+    Question: What is the heat experienced by the heat shield of a space
+capsule (SpaceX Dragon 2 capsule), and what is the temperature to which
+it is heated to as it re-enters Earth from the orbits of (i) Earth, (ii)
+Moon, and (iii) Mars
+
+For the re-entry of the space capsule to Earth's atmosphere from
+Earth's, Moon's, and Mars' orbit, the heat produced is 85389J, 172464J,
+and 192449J respectively. The corresponding maximum temperatures reached
+are 1886K, 3806K, and 4247K.
+
+    \hypertarget{for-earth}{%
+\section{For Earth:}\label{for-earth}}
+
+    \begin{figure}
+\centering
+\includegraphics{attachment:image.png}
+\caption{image.png}
+\end{figure}
+
+    \hypertarget{for-moon}{%
+\section{For Moon:}\label{for-moon}}
+
+    \begin{figure}
+\centering
+\includegraphics{attachment:image.png}
+\caption{image.png}
+\end{figure}
+
+    \hypertarget{for-mars}{%
+\section{For Mars:}\label{for-mars}}
+
+    \begin{figure}
+\centering
+\includegraphics{attachment:image.png}
+\caption{image.png}
+\end{figure}
+
+    \hypertarget{final-thought}{%
+\section{Final Thought}\label{final-thought}}
+
+    With the model, we can find the heat produced on the heat shield, and
+the maximum temperature experienced by the SpaceX Dragon 2 capsule
+during re-entry from different orbits. These values can be used in order
+to verify if the vehicle's heat shield is capable to withstand this much
+heat and these temperature values. Furthermore, it can also help us
+understand the testing procedure that we need to verify its
+capabilities.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
